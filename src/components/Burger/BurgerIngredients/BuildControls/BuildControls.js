@@ -15,6 +15,7 @@ const buildControls = (props) => {
   // });
   return (
     <div className={classes.BuildControls}>
+    <p>Current Price: <strong>{props.price.toFixed(2)}</strong></p>
       {controls.map(el => 
         <BuildControl 
           key={el.label} 
@@ -22,7 +23,8 @@ const buildControls = (props) => {
           // ! can pass the type property directly to the function below
           // type={el.type}
           moreClicked={() => props.ingredientAdded(el.type)}
-          lessClicked={() => props.ingredientRemoved(el.type)}/>)}
+          lessClicked={() => props.ingredientRemoved(el.type)}
+          disabled={props.disabled[el.type]}/>)}
     </div>
   )
 }
