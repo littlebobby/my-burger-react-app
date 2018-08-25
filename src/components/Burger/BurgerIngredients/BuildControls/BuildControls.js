@@ -25,6 +25,9 @@ const buildControls = (props) => {
           moreClicked={() => props.ingredientAdded(el.type)}
           lessClicked={() => props.ingredientRemoved(el.type)}
           disabled={props.disabled[el.type]}/>)}
+    <button 
+      className={classes.OrderButton}
+      disabled={!props.purchasable}>ORDER NOW</button>
     </div>
   )
 }

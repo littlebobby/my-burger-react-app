@@ -20,6 +20,14 @@ class BurgerBuilder extends Component {
       meat: 0,
     },
     totalPrice: 4,
+    purchasable: false,
+  }
+
+  updatePurchaseState = (ingredients) => {
+    const result = Object.values(ingredients).reduce((a, b) => a + b, 0)
+    console.log(result)
+    this.setState({purchasable: result > 0 ? true : false})
+    console.log(this.state.purchasable)
   }
 
   addIngredientHandler = (type) => {
@@ -33,6 +41,8 @@ class BurgerBuilder extends Component {
     const priceAddition = INGREDIENT_PRICE[type];
     const newPrice = this.state.totalPrice + priceAddition
     this.setState({ ingredient: updateIngredient, totalPrice: newPrice})
+    // ! pass the updateIngredient, cause if we can this.state.ingredient, it will still be the old state
+    this.updatePurchaseState(updateIngredient)
   }
 
   removeIngredientHandler = (type) => {
@@ -46,6 +56,7 @@ class BurgerBuilder extends Component {
     const priceDeduction = INGREDIENT_PRICE[type];
     const newPrice = this.state.totalPrice - priceDeduction
     this.setState({ ingredient: updateIngredient, totalPrice: newPrice})
+    this.updatePurchaseState(updateIngredient)
   }
 
   render() {
@@ -63,7 +74,8 @@ class BurgerBuilder extends Component {
           ingredientAdded={this.addIngredientHandler}
           ingredientRemoved={this.removeIngredientHandler}
           disabled={disabledInfo}
-          price={this.state.totalPrice} />
+          price={this.state.totalPrice}
+          purchasable={this.state.purchasable} />
       </Aux>
     )
   }
