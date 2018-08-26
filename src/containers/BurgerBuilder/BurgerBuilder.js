@@ -28,6 +28,9 @@ class BurgerBuilder extends Component {
   updateModalHandler = () => {
     this.setState({purchasing: true})
   }
+  modalClosedHandler = () => {
+    this.setState({purchasing: false})
+  }
 
   updatePurchaseState = (ingredients) => {
     const result = Object.values(ingredients).reduce((a, b) => a + b, 0)
@@ -75,7 +78,7 @@ class BurgerBuilder extends Component {
     }
     return (
       <Aux>
-        <Modal show={this.state.purchasing}>
+        <Modal show={this.state.purchasing} modalClosed={this.modalClosedHandler}>
           <OrderSummary ingredient={this.state.ingredient}/>
         </Modal>
         <Burger ingredient={this.state.ingredient}/>
