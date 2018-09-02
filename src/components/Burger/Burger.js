@@ -13,7 +13,6 @@ const burger = (props) => {
   }, [])
   // ? you can also use Element Embedding in curly braces 
   // ! but here it is worth to extract a variable for readibility
-  console.log(totalIngredients);
   if (totalIngredients.length === 0) totalIngredients = <p>You wanna only bread burger?</p>
   
   return (
